@@ -21,6 +21,10 @@ const invalidDataMessage = 'Неверно поданы данные';
 const movieNotFoundMessage = 'Фильм с переданным movieId не существует';
 const accessDenied = 'Ошибка доступа';
 const internalServerError = 'На сервере произошла ошибка';
+const authError = 'Необходима авторизация';
+
+// JWT for development
+const jwtDevelopment = 'super-hard-pass';
 
 
 module.exports = {
@@ -34,5 +38,7 @@ module.exports = {
   invalidDataMessage,
   movieNotFoundMessage,
   accessDenied,
-  internalServerError
+  internalServerError,
+  authError,
+  jwtDevelopment,
 };
