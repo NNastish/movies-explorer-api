@@ -6,7 +6,28 @@ const { getMovies, createMovie, deleteMovie } = require('../controllers/moviesCo
 
 router.get('/', getMovies);
 
-router.post('/', createMovie);
+router.post('/', celebrate({
+  body: Joi.object().keys({
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().required().pattern(urlCheck),
+    trailer: Joi.string().required().pattern(urlCheck),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    thumbnail: Joi.string().required().pattern(urlCheck),
+    movieId: Joi.string().required(),
+    owner: Joi.string().required().length(24).hex(),
+  }),
+}), createMovie);
 
-router.delete('/:movieId', deleteMovie);
+router.delete('/:movieId', celebrate({
+  params: Joi.object().keys({
+    // FIXME
+    // не знаю в каком виде приходит movieId пока что
+    movieId: Joi.string().hex(),
+  }),
+}), deleteMovie);
 

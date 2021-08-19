@@ -13,7 +13,6 @@ module.exports.getUserInfo = async (req, res, next) => {
     res.status(200).send({
       email: user.email,
       name: user.name,
-      _id: id,
     })
   } catch (e) {
     next(e);
