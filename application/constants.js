@@ -15,6 +15,11 @@ const emailCheck = new RegExp(emailRegex);
 
 // error messages
 const loginErrorMessage = 'Неправильная почта или пароль';
+const notFoundMessage = 'Пользователь не найден';
+const emailDuplicatedMessage = 'Пользователь с таким email уже существует';
+const invalidDataMessage = 'Неверно поданы данные';
+const movieNotFoundMessage = 'Фильм с переданным movieId не существует';
+const accessDenied = 'Ошибка доступа';
 
 
 module.exports = {
@@ -23,4 +28,8 @@ module.exports = {
   urlCheck,
   emailCheck,
   loginErrorMessage,
+  notFoundMessage,
+  emailDuplicatedMessage,
+  invalidDataMessage,
+  movieNotFoundMessage,
 };
