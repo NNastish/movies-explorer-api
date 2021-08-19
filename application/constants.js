@@ -20,6 +20,7 @@ const emailDuplicatedMessage = 'Пользователь с таким email у�
 const invalidDataMessage = 'Неверно поданы данные';
 const movieNotFoundMessage = 'Фильм с переданным movieId не существует';
 const accessDenied = 'Ошибка доступа';
+const internalServerError = 'На сервере произошла ошибка';
 
 
 module.exports = {
@@ -32,4 +33,6 @@ module.exports = {
   emailDuplicatedMessage,
   invalidDataMessage,
   movieNotFoundMessage,
+  accessDenied,
+  internalServerError
 };
