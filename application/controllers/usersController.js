@@ -2,7 +2,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const NotFoundError = require('../errors/notFoundError');
 const EmailCreationError = require('../errors/emailCreationError');
-const { notFoundMessage, } = require('../constants');
+const { notFoundMessage, jwtDevelopment, emailDuplicatedMessage } = require('../constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -48,7 +48,11 @@ module.exports.login = (req, res, next) => {
       );
       res.send({
         token: jwtToken,
-        user: user,
+        user: {
+          _id: user._id,
+          email: user.email,
+          name: user.name
+        },
       });
     })
     .catch(next);

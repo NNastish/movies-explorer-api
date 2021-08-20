@@ -10,9 +10,8 @@ const { celebrate, Joi, errors } = require('celebrate');
 const { login, createUser } = require('./controllers/usersController');
 const { auth } = require('./middlewares/auth');
 const { errorHandler } = require('./middlewares/errorHandler');
-const { mongoUrl, mongoOptions } = require('./constants');
-const { usersRouter } = require('./routes/usersRoute');
-const { moviesRouter } = require('./routes/moviesRoute');
+const { mongoUrl, mongoOptions, pageNotFound } = require('./constants');
+const NotFoundError = require('./errors/notFoundError');
 
 const app = express();
 
@@ -49,11 +48,13 @@ app.post('/signin', celebrate({
 app.use(auth);
 
 // routing
-app.use('/users', usersRouter);
-app.use('/movies', moviesRouter);
+app.use('/users', require('./routes/usersRoute'));
+app.use('/movies', require('./routes/moviesRoute'));
 
 // pageNotFound
-app.use('*');
+app.use('*', (req, res, next) => {
+  next(new NotFoundError(pageNotFound));
+});
 
 // writing errors
 app.use(errorLogger);

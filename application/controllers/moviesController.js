@@ -16,7 +16,7 @@ module.exports.createMovie = async (req, res, next) => {
     const {
       country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId
     } = req.body;
-    const card = await Card.create({
+    const movie = await Movie.create({
       country: country,
       director: director,
       duration: duration,
@@ -30,21 +30,33 @@ module.exports.createMovie = async (req, res, next) => {
       movieId: movieId,
       owner: req.user._id,
     });
-    res.send(card);
+    res.send({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: movie.image,
+      trailer: movie.trailer,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      thumbnail: movie.thumbnail,
+      movieId: movie.movieId,
+      owner: movie.owner,
+    });
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
   }
 }
 
+// находит по полю movieId, которое получили при создании. Удаляет по id нашей базы, которое movie получило при создании
 module.exports.deleteMovie = async (req, res, next) => {
   try {
-    const movieId = req.params;
-    const movie = await Movie.findById(movieId).orFail(new NotFoundError(movieNotFoundMessage));
-    if (movie.owner === req.user._id) {
-      //movie.owner.toString() ?
-      // TODO: define is movie.owner type correct
-      console.log(movie.owner);
-      const deleted = await Movie.findByIdAndDelete(movieId);
+    const { movieId } = req.params;
+    console.log(movieId);
+    const movie = await Movie.findOne({ movieId: movieId }).orFail(new NotFoundError(movieNotFoundMessage));
+    if (movie.owner.toString() === req.user._id) {
+      const deleted = await Movie.findByIdAndDelete(movie._id);
       res.send(deleted);
     } else {
       next(new AccessError(accessDenied));

@@ -8,7 +8,7 @@
     "lint": "npx eslint .",
     "start": "PORT=3000 node application/server.js",
     "dev": "nodemon application/server.js",
-    "debug": "nodemon --inspect application/server.js"
+    "debug": "nodemon --inspect-brk application/server.js"
   },
   "repository": {
     "type": "git",

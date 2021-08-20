@@ -22,6 +22,7 @@ const movieNotFoundMessage = 'Фильм с переданным movieId не с
 const accessDenied = 'Ошибка доступа';
 const internalServerError = 'На сервере произошла ошибка';
 const authError = 'Необходима авторизация';
+const pageNotFound = 'Страница по заданному маршруту не существует';
 
 // JWT for development
 const jwtDevelopment = 'super-hard-pass';
@@ -41,4 +42,5 @@ module.exports = {
   internalServerError,
   authError,
   jwtDevelopment,
+  pageNotFound,
 };
