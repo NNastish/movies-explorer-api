@@ -19,6 +19,7 @@ const accessDenied = 'Ошибка доступа';
 const internalServerError = 'На сервере произошла ошибка';
 const authError = 'Необходима авторизация';
 const pageNotFound = 'Страница по заданному маршруту не существует';
+const queryLimitExceedError = 'Превышен лимит запросов';
 
 // JWT for development
 const jwtDevelopment = 'super-hard-pass';
@@ -36,4 +37,5 @@ module.exports = {
   authError,
   jwtDevelopment,
   pageNotFound,
+  queryLimitExceedError,
 };

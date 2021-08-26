@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { checkCors } = require('./middlewares/cors');
 const { errorHandler } = require('./middlewares/errorHandler');
@@ -21,6 +22,9 @@ mongoose.connect(mongoUrl, mongoOptions);
 
 // connect logger
 app.use(requestLogger);
+
+// protecting and setting http
+app.use(helmet());
 
 // limiter for requests from 1 ip
 app.use(globalLimiter);
