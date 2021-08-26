@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { urlCheck } = require('../constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -25,32 +24,14 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlCheck.test(v);
-      },
-      message: 'Укажите верный путь до изображения',
-    },
   },
   trailer: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlCheck.test(v);
-      },
-      message: 'Укажите верный путь до трейлера',
-    },
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlCheck.test(v);
-      },
-      message: 'Укажите верный путь до миниатюрного изображения',
-    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

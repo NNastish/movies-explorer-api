@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const validator = require('validator');
 const { celebrate, Joi } = require('celebrate');
-const { urlCheck } = require('../constants');
-
+const { makeValidationErrorStr } = require('../utils');
 const { getMovies, createMovie, deleteMovie } = require('../controllers/moviesController');
 
 router.get('/', getMovies);
@@ -14,11 +14,26 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(urlCheck),
-    trailer: Joi.string().required().pattern(urlCheck),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(makeValidationErrorStr('image'));
+    }),
+    trailer: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(makeValidationErrorStr('trailer'));
+    }),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    thumbnail: Joi.string().required().pattern(urlCheck),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(makeValidationErrorStr('thumbnail'));
+    }),
     movieId: Joi.number().required(),
   }),
 }), createMovie);
