@@ -50,12 +50,11 @@ module.exports.createMovie = async (req, res, next) => {
   }
 };
 
-// находит по полю movieId, которое получили при создании.
 // Удаляет по id нашей базы, которое movie получило при создании
 module.exports.deleteMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
-    const movie = await Movie.findOne({ movieId }).orFail(new NotFoundError(movieNotFoundMessage));
+    const movie = await Movie.findById(movieId).orFail(new NotFoundError(movieNotFoundMessage));
     if (movie.owner.toString() === req.user._id) {
       const deleted = await Movie.findByIdAndDelete(movie._id);
       res.send(deleted);

@@ -19,15 +19,13 @@ router.post('/', celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().pattern(urlCheck),
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 
 router.delete('/:movieId', celebrate({
   params: Joi.object().keys({
-    // FIXME
-    // не знаю в каком виде приходит movieId пока что
-    movieId: Joi.string(),
+    movieId: Joi.string().length(24).hex(),
   }),
 }), deleteMovie);
 

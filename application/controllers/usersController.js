@@ -33,7 +33,11 @@ module.exports.updateUser = async (req, res, next) => {
       _id: id,
     });
   } catch (e) {
-    next(e);
+    if (e.code === 11000 && e.name === 'MongoError') {
+      next(new EmailCreationError(emailDuplicatedMessage));
+    } else {
+      next(e);
+    }
   }
 };
 
@@ -67,7 +71,8 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000 && err.name === 'MongoError') {
         next(new EmailCreationError(emailDuplicatedMessage));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
