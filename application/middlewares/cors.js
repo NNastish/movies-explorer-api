@@ -21,4 +21,4 @@ module.exports.checkCors = (req, res, next) => {
     res.end();
   }
   next();
-}
+};

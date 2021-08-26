@@ -14,20 +14,21 @@ module.exports.getMovies = (req, res, next) => {
 module.exports.createMovie = async (req, res, next) => {
   try {
     const {
-      country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId
+      country, director, duration, year, description, image, trailer,
+      nameRU, nameEN, thumbnail, movieId,
     } = req.body;
     const movie = await Movie.create({
-      country: country,
-      director: director,
-      duration: duration,
-      year: year,
-      description: description,
-      image: image,
-      trailer: trailer,
-      nameRU: nameRU,
-      nameEN: nameEN,
-      thumbnail: thumbnail,
-      movieId: movieId,
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailer,
+      nameRU,
+      nameEN,
+      thumbnail,
+      movieId,
       owner: req.user._id,
     });
     res.send({
@@ -47,14 +48,14 @@ module.exports.createMovie = async (req, res, next) => {
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
   }
-}
+};
 
-// находит по полю movieId, которое получили при создании. Удаляет по id нашей базы, которое movie получило при создании
+// находит по полю movieId, которое получили при создании.
+// Удаляет по id нашей базы, которое movie получило при создании
 module.exports.deleteMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
-    console.log(movieId);
-    const movie = await Movie.findOne({ movieId: movieId }).orFail(new NotFoundError(movieNotFoundMessage));
+    const movie = await Movie.findOne({ movieId }).orFail(new NotFoundError(movieNotFoundMessage));
     if (movie.owner.toString() === req.user._id) {
       const deleted = await Movie.findByIdAndDelete(movie._id);
       res.send(deleted);
@@ -64,4 +65,4 @@ module.exports.deleteMovie = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-}
+};

@@ -6,7 +6,6 @@ const { getMovies, createMovie, deleteMovie } = require('../controllers/moviesCo
 
 router.get('/', getMovies);
 
-
 // TODO: в будущем можно добавить валидацию имен на языках через regex
 router.post('/', celebrate({
   body: Joi.object().keys({

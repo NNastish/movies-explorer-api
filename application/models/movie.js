@@ -58,8 +58,8 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: String,  // сомневаюсь, верный ли тип
-    required: true
+    type: String, // сомневаюсь, верный ли тип
+    required: true,
   },
   nameRU: {
     type: String,
@@ -67,8 +67,8 @@ const movieSchema = new mongoose.Schema({
   },
   nameEN: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 module.exports = mongoose.model('movie', movieSchema);

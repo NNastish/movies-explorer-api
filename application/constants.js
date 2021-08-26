@@ -27,7 +27,6 @@ const pageNotFound = 'Страница по заданному маршруту 
 // JWT for development
 const jwtDevelopment = 'super-hard-pass';
 
-
 module.exports = {
   mongoOptions,
   mongoUrl,

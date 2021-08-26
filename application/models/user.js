@@ -26,11 +26,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
     maxlength: 30,
-  }
+  },
 });
-
-
-// TODO: how to rewrite it to async await
+// eslint-disable-next-line
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
@@ -46,7 +44,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
         });
     });
 };
-
+// eslint-disable-next-line
 userSchema.statics.createUserWithHashPass = function (req) {
   return bcrypt.hash(req?.body?.password, 10)
     .then((hash) => this.create({
