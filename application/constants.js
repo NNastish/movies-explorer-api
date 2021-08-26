@@ -6,7 +6,7 @@ const mongoOptions = {
   useUnifiedTopology: true,
 };
 const { NODE_ENV, MONGO_URL } = process.env;
-const mongoUrlDev = 'mongodb://localhost:27017/bitfilmsdb';
+const mongoUrlDev = 'mongodb://localhost:27017/moviesdb';
 const mongoUrl = NODE_ENV === 'production' ? MONGO_URL : mongoUrlDev;
 
 // error messages

@@ -8,6 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { checkCors } = require('./middlewares/cors');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { mongoUrl, mongoOptions } = require('./constants');
+const { globalLimiter } = require('./middlewares/limiter');
 
 const app = express();
 
@@ -20,6 +21,9 @@ mongoose.connect(mongoUrl, mongoOptions);
 
 // connect logger
 app.use(requestLogger);
+
+// limiter for requests from 1 ip
+app.use(globalLimiter);
 
 // checking cross origin resource sharing
 app.use(checkCors);
