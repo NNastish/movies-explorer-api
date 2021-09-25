@@ -1,3 +1,6 @@
 # movies-explorer-api
 
-#### api domain: movies-explorer-api.nomoredomains.monster
+
+### The public domain to access server
+##### movies-explorer-api.nomoredomains.monster
+
